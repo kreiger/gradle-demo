@@ -1,0 +1,21 @@
+def includePath = '.gradle/include'
+
+settingsEvaluated { settings ->
+    File include = new File(settings.rootDir, includePath)
+    if (!include.file) return
+
+    include.eachLine {
+        if (it.trim() =~ /^#/) return
+        if (it.trim().empty) return
+
+        def path = "../$it"
+        def included = new File(settings.rootDir, path)
+        if (!included.directory) {
+            logger.error "$includePath: Not a directory: $path"
+            return
+        }
+
+        logger.lifecycle "Including build from $path"
+        settings.includeBuild path
+    }
+}

@@ -1,0 +1,7 @@
+gradle.beforeProject {
+    println "settings.gradle beforeProject"
+}
+
+gradle.afterProject {
+    println "settings.gradle afterProject"
+}

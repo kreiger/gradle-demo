@@ -1,0 +1,14 @@
+import java.awt.Desktop
+
+def browse(uri) {
+    Desktop.desktop.browse(new URI(uri))
+}
+
+task helloWorld {
+    def uri = "https://en.wikipedia.org/wiki/Hello_World"
+    group = "Hello World"
+    description = "Hello World"
+    doLast {
+        browse(uri)
+    }
+}

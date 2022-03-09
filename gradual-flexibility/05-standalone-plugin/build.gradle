@@ -1,0 +1,7 @@
+apply plugin: GreetingPlugin
+
+buildscript {
+    dependencies {
+        classpath "org.example:standalone-plugin"
+    }
+}

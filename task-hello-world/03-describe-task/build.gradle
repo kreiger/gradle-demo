@@ -1,0 +1,9 @@
+task helloWorld {
+    group = "Hello World"
+    description = "Hello World"
+    doLast {
+        println "Hello World"
+    }
+}
+
+// Run `gradlew tasks`

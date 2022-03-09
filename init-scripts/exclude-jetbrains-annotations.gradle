@@ -1,0 +1,5 @@
+allprojects {
+    configurations.all {
+        exclude group: 'org.jetbrains', module: 'annotations'
+    }
+}

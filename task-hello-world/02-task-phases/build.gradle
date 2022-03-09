@@ -1,0 +1,9 @@
+task helloWorld {
+    doLast {
+        println "execution doLast"
+    }
+    doFirst {
+        println "execution doFirst"
+    }
+    println "configuration"
+}

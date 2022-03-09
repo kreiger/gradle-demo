@@ -1,0 +1,31 @@
+gradle.afterProject { p ->
+    if (!rootProject.hasProperty("idea")) {
+        println "Not an IDEA root project: ${rootProject.name}"
+        return
+    }
+    if (!p.hasProperty("idea")) {
+        println "Not an IDEA project: ${p.name}"
+        return
+    }
+
+    def moduleLanguageLevel = p.idea.module.languageLevel
+    def projectLanguageLevel = rootProject.idea.project.languageLevel
+    //println "Language level ${moduleLanguageLevel?.level} in ${p.idea.module.name} in ${projectLanguageLevel?.level} in ${rootProject.name}"
+    if (projectLanguageLevel?.level != moduleLanguageLevel?.level) {
+        println "Language level ${moduleLanguageLevel?.level} in ${p.idea.module.name} does not match ${projectLanguageLevel?.level} in ${rootProject.name}"
+        if (!moduleLanguageLevel) {
+            p.idea.module.languageLevel = projectLanguageLevel
+        }
+    }
+
+    def moduleJdkName = p.idea.module.jdkName
+    def projectJdkName = rootProject.idea.project.jdkName
+    if (projectJdkName != moduleJdkName) {
+        println "JDK ${moduleJdkName} in ${p.idea.module.name} does not match ${projectJdkName} in ${rootProject.name}"
+        if (!moduleJdkName) {
+            p.idea.module.jdkName = projectJdkName
+        }
+    }
+
+    println "Module JDK: ${p.idea.module.jdkName}, language level: ${p.idea.module.languageLevel?.level}"
+}
